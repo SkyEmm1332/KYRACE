@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40">
+  <!-- Background -->
+  <rect width="120" height="40" fill="none"/>
+  
+  <!-- KYRACE Logo - Minimal Design -->
+  <text x="10" y="28" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">
+    KYR<tspan fill="#D4AF37">ACE</tspan>
+  </text>
+  
+  <!-- Accent line -->
+  <line x1="10" y1="35" x2="110" y2="35" stroke="#D4AF37" stroke-width="2"/>
+</svg>

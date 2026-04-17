@@ -1,0 +1,90 @@
+/* Responsive CSS */
+@media (max-width: 768px) {
+  .nav__links,
+  .nav__search-btn {
+    display: none;
+  }
+  .nav__hamburger {
+    display: flex;
+  }
+  .nav__cart-btn span {
+    display: none;
+  }
+  .nav__cart-btn {
+    padding: 10px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .hero__right {
+    height: 50vh;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .footer__grid > div:nth-child(3),
+  .footer__grid > div:nth-child(4) {
+    display: none;
+  }
+
+  .cart-panel {
+    width: 100%;
+    right: -100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .newsletter__form {
+    flex-direction: column;
+  }
+  .newsletter__input {
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: none;
+  }
+  .newsletter__btn {
+    width: 100%;
+    white-space: normal;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 16px;
+  }
+
+  .product-card__name {
+    font-size: 13px;
+  }
+  .product-card__price {
+    font-size: 14px;
+  }
+
+  .hero__title {
+    font-size: 48px;
+  }
+  .hero__desc {
+    font-size: 14px;
+  }
+
+  .section-title {
+    font-size: 28px;
+  }
+}

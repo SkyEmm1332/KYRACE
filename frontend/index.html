@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="KYRACE — Survêtements et costumes premium. Style urbain, taillé avec précision à Abidjan."
+    />
+    <title>KYRACE — Survêtements &amp; Costumes Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/responsive.css" />
+  </head>
+  <body>
+    <!-- Announcement -->
+    <div class="announcement-bar">
+      Livraison gratuite dès 50 000 FCFA &mdash; Survêtements &amp; Costumes
+      Premium &mdash; Confectionnés à Abidjan
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="main-nav">
+      <button class="nav__logo nav__logo-btn" data-route="home">
+        <img
+          src="/images/navbar/logo.svg"
+          alt="KYRACE Logo"
+          style="height: 40px; width: auto"
+        />
+      </button>
+      <ul class="nav__links">
+        <li class="nav__item">
+          <button class="nav__link" data-route="boutique">Boutique</button>
+        </li>
+        <li class="nav__item">
+          <button class="nav__link" data-route="survet">
+            Survêtements
+            <svg
+              class="nav__link-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div class="nav__dropdown">
+            <button class="nav__dropdown-link" data-route="survet">
+              Survêt Homme
+            </button>
+            <button class="nav__dropdown-link" data-route="survet">
+              Survêt Femme
+            </button>
+            <button
+              class="nav__dropdown-link nav__dropdown-link--all"
+              data-route="survet"
+            >
+              Voir tout &rarr;
+            </button>
+          </div>
+        </li>
+        <li class="nav__item">
+          <button class="nav__link" data-route="costume">
+            Costumes
+            <svg
+              class="nav__link-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div class="nav__dropdown">
+            <button class="nav__dropdown-link" data-route="costume">
+              2 pièces
+            </button>
+            <button class="nav__dropdown-link" data-route="costume">
+              3 pièces
+            </button>
+            <button
+              class="nav__dropdown-link nav__dropdown-link--all"
+              data-route="costume"
+            >
+              Voir tout &rarr;
+            </button>
+          </div>
+        </li>
+        <li class="nav__item">
+          <button class="nav__link" data-route="accessoires">
+            Accessoires
+          </button>
+        </li>
+        <li class="nav__item">
+          <button class="nav__link" data-route="kyrace">KYRACE</button>
+        </li>
+        <li class="nav__item">
+          <button class="nav__link" data-route="contact">Contact</button>
+        </li>
+      </ul>
+      <div class="nav__actions">
+        <button class="nav__search-btn" id="search-open-btn">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+        </button>
+        <button class="nav__cart-btn" id="cart-toggle-btn">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 01-8 0" />
+          </svg>
+          <span>Panier (<span id="cart-count">0</span>)</span>
+        </button>
+        <button class="nav__hamburger" id="nav-hamburger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="search-overlay">
+      <div class="search-overlay__box">
+        <span class="search-overlay__label">Rechercher</span>
+        <div class="search-overlay__row">
+          <input
+            type="search"
+            class="search-overlay__input"
+            id="search-input"
+            placeholder="Survêtement, costume…"
+            autocomplete="off"
+          />
+          <button class="search-overlay__close" id="search-close-btn">
+            &times;
+          </button>
+        </div>
+        <div class="search-overlay__results" id="search-results"></div>
+      </div>
+    </div>
+
+    <!-- Cart Panel -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-panel" id="cart-panel">
+      <div class="cart-panel__header">
+        <h2 class="cart-panel__title">PANIER</h2>
+        <button class="cart-panel__close" id="cart-close-btn">&times;</button>
+      </div>
+      <div class="cart-panel__items" id="cart-items">
+        <div class="cart-empty"><p>Panier vide</p></div>
+      </div>
+      <div class="cart-panel__footer">
+        <div class="cart-panel__total">
+          <span class="cart-panel__total-label">Total</span>
+          <span class="cart-panel__total-amount" id="cart-total">0 FCFA</span>
+        </div>
+        <button class="checkout-btn" id="checkout-btn">
+          Passer la commande
+        </button>
+      </div>
+    </div>
+
+    <!-- Views SPA -->
+    <div class="view active" id="view-home">
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero__left">
+          <span class="hero__tag">Collection 2025 — Urban &amp; Élégance</span>
+          <h1 class="hero__title">STYLE<span>URBAIN</span><em>AFFIRMÉ</em></h1>
+          <p class="hero__desc">
+            Des survêtements haut de gamme et des costumes taillés avec
+            précision. Chaque pièce KYRACE allie confort, style et identité
+            africaine.
+          </p>
+          <div class="hero__actions">
+            <button class="btn-primary" data-route="boutique">Découvrir</button>
+            <button class="btn-outline" data-route="kyrace">
+              Notre histoire
+            </button>
+          </div>
+        </div>
+        <div class="hero__right">
+          <div class="hero__card">
+            <div class="img-ph img-ph--black"></div>
+            <div class="hero__card-label">Costumes Premium</div>
+          </div>
+          <div class="hero__card">
+            <div class="img-ph img-ph--forest"></div>
+            <div class="hero__card-label">Survêt Homme</div>
+          </div>
+          <div class="hero__card">
+            <div class="img-ph img-ph--terracotta"></div>
+            <div class="hero__card-label">Survêt Femme</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Products -->
+      <section class="featured">
+        <div class="featured__header">
+          <div>
+            <span class="section-tag">Sélection</span>
+            <h2 class="section-title">Nos <em>vedettes</em></h2>
+          </div>
+          <button class="featured__see-all" data-route="boutique">
+            Voir tout
+          </button>
+        </div>
+        <div class="products-grid" id="featured-grid"></div>
+      </section>
+
+      <!-- Newsletter -->
+      <section class="newsletter">
+        <h2 class="newsletter__title">Restez dans la course</h2>
+        <p class="newsletter__sub">
+          Recevez nos new collections et offres exclusives.
+        </p>
+        <div class="newsletter__form">
+          <input
+            type="email"
+            id="newsletter-email"
+            class="newsletter__input"
+            placeholder="Votre email"
+          />
+          <button class="newsletter__btn" id="newsletter-btn">
+            S'inscrire
+          </button>
+        </div>
+        <p class="newsletter__success" id="newsletter-success">Merci!</p>
+      </section>
+    </div>
+
+    <!-- Boutique View -->
+    <div class="view" id="view-boutique">
+      <div class="shop-page">
+        <div class="shop-page__header">
+          <span class="section-tag">Catalogue</span>
+          <h1 class="section-title">La <em>boutique</em></h1>
+        </div>
+        <div class="shop-page__toolbar">
+          <input
+            type="search"
+            id="boutique-search"
+            class="shop-search"
+            placeholder="Rechercher…"
+          />
+          <span class="shop-count" id="boutique-count"></span>
+        </div>
+        <div
+          id="boutique-filter-tabs"
+          class="filter-tabs"
+          style="margin-bottom: 32px"
+        >
+          <button class="filter-tab active" data-filter="all">Tout</button>
+          <button class="filter-tab" data-filter="survet">Survêt</button>
+          <button class="filter-tab" data-filter="costume">Costume</button>
+          <button class="filter-tab" data-filter="accessoires">
+            Accessoires
+          </button>
+        </div>
+        <div class="products-grid" id="boutique-grid"></div>
+      </div>
+    </div>
+
+    <!-- Contact View -->
+    <div class="view" id="view-contact">
+      <div class="contact-page">
+        <div class="section-header">
+          <span class="section-tag">Nous contacter</span>
+          <h1 class="section-title">Une <em>question</em>?</h1>
+        </div>
+        <div class="contact-grid">
+          <div>
+            <h2 class="contact-info__title">Parlons de votre projet</h2>
+            <p class="contact-info__desc">
+              Pour toute question, écrivez-nous. Nous répondons sous 24h.
+            </p>
+            <ul class="contact-details">
+              <li class="contact-detail">
+                <svg
+                  class="contact-detail__icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path
+                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+                  />
+                </svg>
+                Abidjan, Côte d'Ivoire
+              </li>
+              <li class="contact-detail">
+                <svg
+                  class="contact-detail__icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path
+                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+                  />
+                </svg>
+                +225 XX XX XX XX
+              </li>
+              <li class="contact-detail">
+                <svg
+                  class="contact-detail__icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+                contact@kyrace.com
+              </li>
+            </ul>
+          </div>
+          <div class="contact-form">
+            <div
+              class="form-success"
+              id="contact-success"
+              style="display: none"
+            >
+              Message envoyé ✓
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Prénom</label><input type="text" id="c-prenom" />
+              </div>
+              <div class="form-group">
+                <label>Nom</label><input type="text" id="c-nom" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email *</label><input type="email" id="c-email" required />
+            </div>
+            <div class="form-group">
+              <label>Téléphone</label><input type="tel" id="c-tel" />
+            </div>
+            <div class="form-group">
+              <label>Sujet</label>
+              <select id="c-sujet">
+                <option value="">Choisir</option>
+                <option value="commande">Commande</option>
+                <option value="revendeur">Revendeur</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Message *</label
+              ><textarea id="c-message" rows="4" required></textarea>
+            </div>
+            <button type="button" class="btn-primary" id="contact-submit-btn">
+              Envoyer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KYRACE Brand View -->
+    <div class="view" id="view-kyrace">
+      <div class="brand-page">
+        <div class="brand-page__hero">
+          <div>
+            <span class="brand-page__hero-tag">Notre univers</span>
+            <h1 class="brand-page__hero-title">KYRACE</h1>
+          </div>
+        </div>
+        <div class="brand-page__body">
+          <div class="wax-section">
+            <div class="wax-section__inner">
+              <h2
+                class="section-title"
+                style="color: var(--white); margin-bottom: 28px"
+              >
+                L'<em style="color: var(--gold)">élégance</em> à l'africaine
+              </h2>
+              <p
+                style="
+                  color: rgba(255, 255, 255, 0.6);
+                  font-size: 15px;
+                  line-height: 1.8;
+                "
+              >
+                Chez KYRACE, nous croyons que le style urbain et l'élégance ne
+                s'opposent pas. Nos survêtements haut de gamme et nos costumes
+                sur mesure sont conçus pour l'homme et la femme modernes qui
+                veulent s'affirmer.
+              </p>
+              <p
+                style="
+                  color: rgba(255, 255, 255, 0.6);
+                  font-size: 15px;
+                  line-height: 1.8;
+                  margin-top: 16px;
+                "
+              >
+                Chaque pièce est confectionnée dans nos ateliers d'Abidjan avec
+                des tissus premium. La coupe, la couture, les finitions — rien
+                n'est laissé au hasard.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer__grid">
+        <div>
+          <button
+            class="nav__logo nav__logo-btn"
+            data-route="home"
+            style="
+              display: inline-block;
+              background: none;
+              border: none;
+              padding: 0;
+              cursor: pointer;
+            "
+          >
+            <img
+              src="/images/footer/logo_footer.svg"
+              alt="KYRACE Logo"
+              style="height: 40px; width: auto"
+            />
+          </button>
+          <p class="footer__brand-desc">
+            Survêtements et costumes premium confectionnés à Abidjan.
+          </p>
+          <div class="footer__socials">
+            <a href="#" class="footer__social-link">Fb</a>
+            <a href="#" class="footer__social-link">In</a>
+            <a href="#" class="footer__social-link">Wa</a>
+          </div>
+        </div>
+        <div class="footer__col">
+          <span class="footer__col-title">Boutique</span>
+          <ul>
+            <li><button data-route="survet">Survêtements</button></li>
+            <li><button data-route="costume">Costumes</button></li>
+            <li><button data-route="accessoires">Accessoires</button></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <span class="footer__col-title">Info</span>
+          <ul>
+            <li><button data-route="kyrace">À propos</button></li>
+            <li><button data-route="contact">Contact</button></li>
+            <li><a href="#">Mentions légales</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <span class="footer__col-title">Admin</span>
+          <ul>
+            <li><a href="/admin">Dashboard</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2025 KYRACE. Tous droits réservés.</p>
+      </div>
+    </footer>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/cart.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/ui.js"></script>
+  </body>
+</html>

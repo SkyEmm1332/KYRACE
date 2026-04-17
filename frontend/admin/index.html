@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KYRACE - Dashboard Admin</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="/admin/css/admin.css" />
+  </head>
+  <body>
+    <div class="admin-container">
+      <!-- SIDEBAR -->
+      <aside class="admin-sidebar">
+        <div class="admin-brand">KYRACE ADMIN</div>
+
+        <nav class="admin-nav">
+          <button class="admin-nav-btn active" data-section="products">
+            Produits
+          </button>
+          <button class="admin-nav-btn" data-section="commandes">
+            Commandes
+          </button>
+          <button class="admin-nav-btn" data-section="messages">
+            Messages
+          </button>
+          <button class="admin-nav-btn" data-section="promos">
+            Codes Promo
+          </button>
+          <button class="admin-nav-btn" data-section="stats">
+            Statistiques
+          </button>
+        </nav>
+
+        <button class="logout-btn" id="logout-btn">Déconnexion</button>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="admin-main">
+        <!-- HEADER -->
+        <div class="admin-header">
+          <h1>Dashboard KYRACE</h1>
+          <span id="admin-user">Admin</span>
+        </div>
+
+        <!-- LOGIN SECTION -->
+        <div class="admin-section" id="section-login" style="display: block">
+          <div class="login-box">
+            <h2>Connexion Admin</h2>
+            <div class="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                id="login-email"
+                placeholder="admin@kyrace.com"
+              />
+            </div>
+            <div class="form-group">
+              <label>Mot de passe</label>
+              <input
+                type="password"
+                id="login-password"
+                placeholder="Entrez votre mot de passe"
+              />
+            </div>
+            <button class="btn-primary" id="login-btn">Se connecter</button>
+            <p
+              id="login-error"
+              style="color: #dc3545; margin-top: 10px; display: none"
+            ></p>
+          </div>
+        </div>
+
+        <!-- PRODUCTS SECTION -->
+        <div class="admin-section" id="section-products" style="display: none">
+          <div class="section-header">
+            <h2>Gestion des Produits</h2>
+            <button class="btn-primary" id="add-product-btn">
+              Ajouter un Produit
+            </button>
+          </div>
+
+          <div class="product-form" id="product-form" style="display: none">
+            <h3>Nouveau Produit</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Nom *</label>
+                <input type="text" id="prod-name" required />
+              </div>
+              <div class="form-group">
+                <label>Catégorie *</label>
+                <select id="prod-category" required>
+                  <option value="">Sélectionner</option>
+                  <option value="survet">Survêtement</option>
+                  <option value="costume">Costume</option>
+                  <option value="accessoires">Accessoires</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Prix (FCFA) *</label>
+                <input type="number" id="prod-price" required />
+              </div>
+              <div class="form-group">
+                <label>Ancien Prix</label>
+                <input type="number" id="prod-old-price" />
+              </div>
+              <div class="form-group">
+                <label>Couleur</label>
+                <select id="prod-color">
+                  <option value="img-ph--black">Noir</option>
+                  <option value="img-ph--charcoal">Charbon</option>
+                  <option value="img-ph--navy">Marine</option>
+                  <option value="img-ph--forest">Forêt</option>
+                  <option value="img-ph--gold">Or</option>
+                  <option value="img-ph--terracotta">Terracotta</option>
+                </select>
+              </div>
+            </div>
+
+            <h4 style="margin-top: 20px">Stock par Taille</h4>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>S</label>
+                <input type="number" id="prod-stock-s" value="0" />
+              </div>
+              <div class="form-group">
+                <label>M</label>
+                <input type="number" id="prod-stock-m" value="0" />
+              </div>
+              <div class="form-group">
+                <label>L</label>
+                <input type="number" id="prod-stock-l" value="0" />
+              </div>
+              <div class="form-group">
+                <label>XL</label>
+                <input type="number" id="prod-stock-xl" value="0" />
+              </div>
+              <div class="form-group">
+                <label>XXL</label>
+                <input type="number" id="prod-stock-xxl" value="0" />
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 20px">
+              <label
+                ><input type="checkbox" id="prod-vedette" /> Afficher en
+                vedette</label
+              >
+            </div>
+            <div class="form-group">
+              <label
+                ><input type="checkbox" id="prod-promo" /> En promotion</label
+              >
+            </div>
+
+            <div style="margin-top: 20px; display: flex; gap: 10px">
+              <button class="btn-primary" id="save-product-btn">
+                Sauvegarder
+              </button>
+              <button class="btn-secondary" id="cancel-product-btn">
+                Annuler
+              </button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Catégorie</th>
+                  <th>Prix</th>
+                  <th>Stock</th>
+                  <th>Vedette</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="products-table-body">
+                <tr>
+                  <td colspan="6" style="text-align: center; padding: 20px">
+                    Chargement...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- COMMANDES SECTION -->
+        <div class="admin-section" id="section-commandes" style="display: none">
+          <div class="section-header">
+            <h2>Gestion des Commandes</h2>
+          </div>
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Numéro</th>
+                  <th>Client</th>
+                  <th>Total</th>
+                  <th>Statut</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="commandes-table-body">
+                <tr>
+                  <td colspan="6" style="text-align: center; padding: 20px">
+                    Chargement...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- MESSAGES SECTION -->
+        <div class="admin-section" id="section-messages" style="display: none">
+          <div class="section-header">
+            <h2>Messages de Contact</h2>
+          </div>
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Email</th>
+                  <th>Sujet</th>
+                  <th>Message</th>
+                  <th>Date</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="messages-table-body">
+                <tr>
+                  <td colspan="6" style="text-align: center; padding: 20px">
+                    Chargement...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- PROMOS SECTION -->
+        <div class="admin-section" id="section-promos" style="display: none">
+          <div class="section-header">
+            <h2>Codes Promo</h2>
+            <button class="btn-primary" id="add-promo-btn">Nouveau Code</button>
+          </div>
+
+          <div class="promo-form" id="promo-form" style="display: none">
+            <h3>Créer un Code Promo</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Code *</label>
+                <input
+                  type="text"
+                  id="promo-code"
+                  placeholder="EX: KYRACE20"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label>Réduction (%) *</label>
+                <input
+                  type="number"
+                  id="promo-reduction"
+                  min="0"
+                  max="100"
+                  required
+                />
+              </div>
+            </div>
+            <div style="margin-top: 20px; display: flex; gap: 10px">
+              <button class="btn-primary" id="save-promo-btn">Créer</button>
+              <button class="btn-secondary" id="cancel-promo-btn">
+                Annuler
+              </button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Réduction</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="promos-table-body">
+                <tr>
+                  <td colspan="4" style="text-align: center; padding: 20px">
+                    Chargement...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- STATS SECTION -->
+        <div class="admin-section" id="section-stats" style="display: none">
+          <div class="section-header">
+            <h2>Statistiques</h2>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-value" id="stat-total-orders">0</div>
+              <div class="stat-label">Commandes</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="stat-total-revenue">0 FCFA</div>
+              <div class="stat-label">Revenu</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="stat-unread-messages">0</div>
+              <div class="stat-label">Messages non lus</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="stat-total-products">0</div>
+              <div class="stat-label">Produits</div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="/admin/js/admin.js"></script>
+  </body>
+</html>
